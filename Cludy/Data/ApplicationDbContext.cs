@@ -21,6 +21,10 @@ public class ApplicationDbContext : IdentityDbContext<User, Microsoft.AspNetCore
         modelBuilder.Entity<StudyTask>(entity =>
         {
             entity.HasKey(e => e.Id);
+            entity.HasIndex(e => e.UserId);
+            entity.HasIndex(e => e.CreatedAt);
+            entity.HasIndex(e => e.IsCompleted);
+            
             entity.HasOne(e => e.User)
                   .WithMany(u => u.Tasks)
                   .HasForeignKey(e => e.UserId)
@@ -31,6 +35,12 @@ public class ApplicationDbContext : IdentityDbContext<User, Microsoft.AspNetCore
         modelBuilder.Entity<StudySession>(entity =>
         {
             entity.HasKey(e => e.Id);
+            entity.HasIndex(e => e.TaskId);
+            entity.HasIndex(e => e.UserId);
+            entity.HasIndex(e => e.CreatedAt);
+            entity.HasIndex(e => e.IsCompleted);
+            entity.HasIndex(e => e.Type);
+            
             entity.HasOne(e => e.Task)
                   .WithMany(t => t.Sessions)
                   .HasForeignKey(e => e.TaskId)
