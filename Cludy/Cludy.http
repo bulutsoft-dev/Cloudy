@@ -1,0 +1,6 @@
+@Cludy_HostAddress = http://localhost:5243
+
+GET {{Cludy_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
